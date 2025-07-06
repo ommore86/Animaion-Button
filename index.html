@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Animated Button Demo</title>
+    <style>
+        :root {
+            --btn-bg: #3498db;
+            --btn-bg-hover: #1abc9c;
+            --btn-color: #ffffff;
+            --btn-color-hover: #ffffff;
+            --btn-border: 2px solid #3498db;
+            --btn-border-hover: 2px solid #1abc9c;
+            --transition-duration: 300ms;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            background: #f0f4f8;
+            font-family: system-ui, sans-serif;
+        }
+
+        button.magic {
+            background: var(--btn-bg);
+            color: var(--btn-color);
+            border: var(--btn-border);
+            padding: 1rem 2rem;
+            font-size: 1.25rem;
+            border-radius: 8px;
+            cursor: pointer;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+
+            transition:
+                background-color var(--transition-duration) ease,
+                color var(--transition-duration) ease,
+                border-color var(--transition-duration) ease,
+                transform 150ms ease;
+
+            animation: pulse 4s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 12px rgba(52, 152, 219, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+            }
+        }
+
+        button.magic:hover,
+        button.magic:focus-visible {
+            background: var(--btn-bg-hover);
+            color: var(--btn-color-hover);
+            border: var(--btn-border-hover);
+            transform: translateY(-2px) scale(1.03);
+        }
+
+        button.magic:active {
+            transform: translateY(0) scale(0.97);
+        }
+
+        @supports not (--btn-bg: #000) {
+            button.magic {
+                background: #3498db;
+                color: #fff;
+                border: 2px solid #3498db;
+                transition: background-color .3s ease, color .3s ease, border-color .3s ease, transform .15s ease;
+                animation: pulseFallback 4s infinite;
+            }
+
+            button.magic:hover,
+            button.magic:focus-visible {
+                background: #1abc9c;
+                border-color: #1abc9c;
+            }
+
+            @keyframes pulseFallback {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4);
+                }
+
+                70% {
+                    box-shadow: 0 0 0 12px rgba(52, 152, 219, 0);
+                }
+
+                100% {
+                    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="magic">Hover me!</button>
+</body>
+
+</html>
